@@ -34,7 +34,7 @@ export const loader: LoaderFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: pageTitle(),
+  title: pageTitle("Lista de Produtos"),
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -84,7 +84,7 @@ const Document = withEmotionCache(
     }, []);
 
     return (
-      <html lang="en">
+      <html lang="pt">
         <head>
           <Meta />
           <Links />
