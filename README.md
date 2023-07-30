@@ -1,7 +1,14 @@
-# Welcome to Remix!
+# Lojinha Web
+
+"Lojinha Importados" is a Brazilian store focused on general electronic products, selling its items in a physical store and on marketplaces such as MercadoLivre and its own virtual store.
+This project is a more updated version of the [current site](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development.
+
+It was generated automatically by Remix, focused on use Netlify as a host.
 
 - [Remix Docs](https://remix.run/docs)
 - [Netlify Functions](https://www.netlify.com/products/functions/)
+  
+---
 
 ## Netlify Setup
 
