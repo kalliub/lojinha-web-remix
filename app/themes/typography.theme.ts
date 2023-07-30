@@ -1,5 +1,4 @@
 import type { ThemeOptions } from "@mui/material";
-import { palette } from "./palette.theme";
 
 // Allowing MaterialUI Typography Component to accept custom "body3" variant on it's types.
 declare module "@mui/material/Typography" {
@@ -82,7 +81,7 @@ export default {
   typography: {
     fontFamily: "Montserrat, sans-serif",
     allVariants: {
-      color: palette.grey[900],
+      color: "white",
     },
     ...typographyVariants,
   },

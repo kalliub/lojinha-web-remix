@@ -11,7 +11,8 @@ const Category = () => {
   const categoryProducts = useMemo(() => {
     const items = listProducts.productList.filter(
       ({ categoria }) =>
-        categoria?.toLowerCase() === selectedCategory?.toLowerCase()
+        categoria?.toLowerCase() === selectedCategory?.toLowerCase() ||
+        selectedCategory === "all"
     );
     return items;
   }, [listProducts, selectedCategory]);
@@ -19,6 +20,7 @@ const Category = () => {
   /* Checks if the category exists in the list of products, if not, redirects to the list page */
   useEffect(() => {
     if (
+      selectedCategory !== "all" &&
       !listProducts.productList.some(
         ({ categoria }) =>
           categoria?.toLowerCase() === selectedCategory?.toLowerCase()
@@ -30,7 +32,13 @@ const Category = () => {
 
   return (
     <Grid container justifyContent="center">
-      <PageTitle title={selectedCategory || ""} />
+      <PageTitle
+        title={
+          selectedCategory === "all"
+            ? "Todos os produtos"
+            : selectedCategory || ""
+        }
+      />
 
       {categoryProducts.map((product) => {
         return (
