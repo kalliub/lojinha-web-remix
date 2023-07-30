@@ -13,7 +13,6 @@ const getInfo = async () => {
       const data = new Uint8Array(ab);
       const workbook = XLSX.read(data, { type: "array" });
 
-      /* DO SOMETHING WITH workbook HERE */
       return xlsxResultToJSON(workbook);
     })
     .catch((e) => {
@@ -53,17 +52,15 @@ const transformDatasetIntoJSON = (list: Array<[]>) => {
   return finalArray.filter((e) => e !== null);
 };
 
+/** Handles data on the product list, by filtering and adapting some values. */
 const handleProductList = (productList: Array<any>) => {
-  // Função responsável por manipulações de dados na lista de produtos
-  // como filtros e alterações eventuais de valores
-
   let filteredList = productList
-    // Removendo produtos inativos
+    // Removing inactive products
     .filter((product) => product.inativo !== true)
-    // Removendo produtos que não possuem as chaves de descrição ou valor
+    // Removing products that don't have the description or value keys
     .filter((product) => product.descricao && product.valor);
 
-  // Exceção para casos onde o produto não tenha marca
+  // Exception for cases where the product doesn't have a brand
   filteredList = filteredList.map((product) => {
     if (!product.marca) {
       return {
