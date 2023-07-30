@@ -1,33 +1,16 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { Link } from "@remix-run/react";
+import { Grid, Typography } from "@mui/material";
 import { useList } from "context/ListContext";
 import { palette } from "themes/palette.theme";
-import Icon from "./Icon";
 
 interface PageTitleProps {
   title: string;
-  backLink?: string;
 }
 
-const PageTitle = ({ backLink, title }: PageTitleProps) => {
+const PageTitle = ({ title }: PageTitleProps) => {
   const { updateDate } = useList();
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        {backLink && (
-          <div
-            style={{
-              position: "absolute",
-              left: "20px",
-            }}
-          >
-            <Link to={backLink}>
-              <Button variant="secondaryIcon" sx={{ color: "white" }}>
-                <Icon name="angle-left" size="large" />
-              </Button>
-            </Link>
-          </div>
-        )}
         <Typography variant="h2" color="white">
           {title}
         </Typography>

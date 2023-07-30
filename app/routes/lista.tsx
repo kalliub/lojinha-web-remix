@@ -1,10 +1,11 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import type { LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useLocation } from "@remix-run/react";
 import { useMemo } from "react";
 import { getProductsCategory } from "api/sheet.server";
 import LogoLojinha from "assets/logoLojinha.png";
+import Icon from "components/Icon";
 import PageTitle from "components/PageTitle";
 import getJson from "config/sheetFromCSV";
 import { ListProvider } from "context/ListContext";
@@ -16,11 +17,11 @@ export const loader: LoaderFunction = async () => {
   const listData = await getJson();
   if (!listData) return redirect("", { status: 503 });
   const categories = getProductsCategory(listData?.productList);
-  return json({ data: listData, categories });
+  return json({ listData, categories });
 };
 
 const Home = () => {
-  const { data, categories } = useLoaderData();
+  const { listData, categories } = useLoaderData();
   const location = useLocation();
   const isCategoriesPage = useMemo(
     () => /^\/lista\/?$/.test(location.pathname),
@@ -34,7 +35,7 @@ const Home = () => {
           position: "fixed",
           top: 0,
           height: NAVBAR_HEIGHT,
-          zIndex: 1,
+          zIndex: 99,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -42,20 +43,38 @@ const Home = () => {
           backgroundColor: palette.primary.main,
         }}
       >
+        <div
+          style={{
+            position: "absolute",
+            left: "20px",
+          }}
+        >
+          <Link to="/lista">
+            <Button variant="text" sx={{ color: "white" }}>
+              <Icon name="angle-left" size="large" />
+              <Typography variant="caption" color="white">
+                Voltar
+              </Typography>
+            </Button>
+          </Link>
+        </div>
         <img src={LogoLojinha} alt="Lojinha Importados" height={35} />
       </Box>
 
-      <ListProvider value={data}>
+      <ListProvider value={listData}>
         <Grid container mt={`${NAVBAR_HEIGHT}px`} justifyContent="center">
           {isCategoriesPage ? (
             <>
               <PageTitle title="Categorias" />
-              {categories.map((cat: string) => (
-                <Grid item key={cat} width="100%">
-                  <Link to={`/lista/${cat}`}>
+              <Grid container justifyContent="center">
+                {categories.map((cat: string) => (
+                  <Link
+                    to={`/lista/${cat}`}
+                    style={{ width: "100%" }}
+                    key={cat}
+                  >
                     <Box
                       borderBottom="1px solid rgba(0,0,0,0.1)"
-                      p={1.5}
                       sx={{
                         "&:hover": {
                           backgroundColor: palette.primary[200],
@@ -66,14 +85,20 @@ const Home = () => {
                           },
                         },
                       }}
+                      p={2}
+                      width="100%"
                     >
-                      <Typography variant="body1" color="white">
+                      <Typography
+                        variant="body1"
+                        color="white"
+                        textAlign="center"
+                      >
                         {cat}
                       </Typography>
                     </Box>
                   </Link>
-                </Grid>
-              ))}
+                ))}
+              </Grid>
             </>
           ) : (
             <Outlet />

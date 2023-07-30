@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import * as XLSX from "xlsx";
+import type { Product } from "types/List";
 
 const getInfo = async () => {
   return fetch(ENV.GOOGLE_SHEETS_URL)
@@ -31,7 +32,7 @@ const xlsxResultToJSON = (workbook: XLSX.WorkBook) => {
   return JSON.stringify(result, undefined, 2);
 };
 
-const transformDatasetIntoJSON = (list: Array<[]>) => {
+const transformDatasetIntoJSON = (list: [][]) => {
   if (!list || list.length === 0) return null;
 
   const keys = list[0];
@@ -53,7 +54,7 @@ const transformDatasetIntoJSON = (list: Array<[]>) => {
 };
 
 /** Handles data on the product list, by filtering and adapting some values. */
-const handleProductList = (productList: Array<any>) => {
+const handleProductList = (productList: Product[]) => {
   let filteredList = productList
     // Removing inactive products
     .filter((product) => product.inativo !== true)
@@ -84,13 +85,11 @@ export default async () => {
     const arrayTaxas = transformDatasetIntoJSON(json["2 Taxas"]);
     const arrayLinks = transformDatasetIntoJSON(json["3 Links externos"]);
 
-    const result = {
-      productList: handleProductList(arrayProdutos),
+    return {
+      productList: handleProductList(arrayProdutos as Product[]),
       updateDate: listaAtualizadaEm,
       taxes: arrayTaxas,
       links: arrayLinks,
     };
-
-    return result;
   });
 };

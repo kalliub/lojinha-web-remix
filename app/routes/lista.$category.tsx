@@ -6,34 +6,39 @@ import { useList } from "context/ListContext";
 
 const Category = () => {
   const navigate = useNavigate();
-  const { category } = useParams();
+  const { category: selectedCategory } = useParams();
   const listProducts = useList();
-  const categoryItems = useMemo(() => {
+  const categoryProducts = useMemo(() => {
     const items = listProducts.productList.filter(
-      (item) => item.categoria.toLowerCase() === category?.toLowerCase()
+      ({ categoria }) =>
+        categoria?.toLowerCase() === selectedCategory?.toLowerCase()
     );
     return items;
-  }, [listProducts, category]);
+  }, [listProducts, selectedCategory]);
 
   /* Checks if the category exists in the list of products, if not, redirects to the list page */
   useEffect(() => {
     if (
       !listProducts.productList.some(
-        (item) => item.categoria.toLowerCase() === category?.toLowerCase()
+        ({ categoria }) =>
+          categoria?.toLowerCase() === selectedCategory?.toLowerCase()
       )
     ) {
       navigate("/lista");
     }
-  }, [listProducts, category, navigate]);
+  }, [listProducts, selectedCategory, navigate]);
 
   return (
     <Grid container justifyContent="center">
-      <PageTitle backLink="/lista" title={category || ""} />
+      <PageTitle title={selectedCategory || ""} />
 
-      {categoryItems.map((item) => {
+      {categoryProducts.map((product) => {
         return (
-          <Box key={`${item.descricao}${item.valor}${item.cor}`} width="100%">
-            <Typography color="white">{item.descricao}</Typography>
+          <Box
+            key={`${product.descricao}${product.valor}${product.cor}`}
+            width="100%"
+          >
+            <Typography color="white">{product.descricao}</Typography>
           </Box>
         );
       })}
