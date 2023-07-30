@@ -10,6 +10,8 @@ import getJson from "config/sheetFromCSV";
 import { ListProvider } from "context/ListContext";
 import { palette } from "themes/palette.theme";
 
+const NAVBAR_HEIGHT = 75;
+
 export const loader: LoaderFunction = async () => {
   const listData = await getJson();
   if (!listData) return redirect("", { status: 503 });
@@ -29,49 +31,55 @@ const Home = () => {
     <Grid container>
       <Box
         style={{
-          padding: "4px",
+          position: "fixed",
+          top: 0,
+          height: NAVBAR_HEIGHT,
+          zIndex: 1,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
+          backgroundColor: palette.primary.main,
         }}
       >
         <img src={LogoLojinha} alt="Lojinha Importados" height={35} />
       </Box>
 
-      {isCategoriesPage ? (
-        <Grid container justifyContent="center">
-          <PageTitle title="Categorias" />
-          {categories.map((cat: string) => (
-            <Grid item key={cat} width="100%">
-              <Link to={`/lista/${cat}`}>
-                <Box
-                  borderBottom={`1px solid ${palette.grey[200]}`}
-                  p={1.5}
-                  sx={{
-                    "&:hover": {
-                      backgroundColor: palette.primary[200],
-                      transition: "200ms",
-                      "& p": {
-                        color: palette.primary.main,
-                        fontWeight: "bold",
-                      },
-                    },
-                  }}
-                >
-                  <Typography variant="body1" color="white">
-                    {cat}
-                  </Typography>
-                </Box>
-              </Link>
-            </Grid>
-          ))}
+      <ListProvider value={data}>
+        <Grid container mt={`${NAVBAR_HEIGHT}px`} justifyContent="center">
+          {isCategoriesPage ? (
+            <>
+              <PageTitle title="Categorias" />
+              {categories.map((cat: string) => (
+                <Grid item key={cat} width="100%">
+                  <Link to={`/lista/${cat}`}>
+                    <Box
+                      borderBottom="1px solid rgba(0,0,0,0.1)"
+                      p={1.5}
+                      sx={{
+                        "&:hover": {
+                          backgroundColor: palette.primary[200],
+                          transition: "200ms",
+                          "& p": {
+                            color: palette.primary.main,
+                            fontWeight: "bold",
+                          },
+                        },
+                      }}
+                    >
+                      <Typography variant="body1" color="white">
+                        {cat}
+                      </Typography>
+                    </Box>
+                  </Link>
+                </Grid>
+              ))}
+            </>
+          ) : (
+            <Outlet />
+          )}
         </Grid>
-      ) : (
-        <ListProvider value={data}>
-          <Outlet />
-        </ListProvider>
-      )}
+      </ListProvider>
     </Grid>
   );
 };
