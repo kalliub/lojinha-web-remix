@@ -1,0 +1,45 @@
+* {
+  letter-spacing: 0px;
+  font-family: Montserrat, sans-serif;
+}
+
+body {
+  margin: 0px;
+  background-color: #5d36ab;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #b9b8c7;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #393847;
+}
+
+.hidden-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: #b9b8c7;
+}
+.hidden-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e9ecef;
+}
+
+.hidden-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #71708f;
+}
