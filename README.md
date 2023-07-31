@@ -4,7 +4,10 @@
 
 ### [🔗 Check it out!](https://lojinha-remix.netlify.app/)
 
+### Important: This project migration is a Work In Progress!
+
 ## About the project
+
 
 This project is a more updated version of the [current Lojinha official website](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development, implement best practices and open it to a public repository.
 
