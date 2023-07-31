@@ -5,7 +5,7 @@ import { Outlet, useLoaderData, useLocation } from "@remix-run/react";
 import { useMemo } from "react";
 import { getProductsCategory } from "api/sheet.server";
 import CategoryList from "components/CategoryList";
-import Navbar, { NAVBAR_HEIGHT } from "components/Navbar";
+import Navbar, { NAVBAR_HEIGHT } from "components/DesignSystem/Navbar";
 import getJson from "config/sheetFromCSV";
 import { ListProvider } from "context/ListContext";
 

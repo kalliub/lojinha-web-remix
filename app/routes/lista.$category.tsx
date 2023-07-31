@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "@remix-run/react";
 import { useEffect, useMemo } from "react";
-import PageTitle from "components/PageTitle";
+import PageTitle from "components/DesignSystem/PageTitle";
 import { useList } from "context/ListContext";
 
 const Category = () => {

@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "@remix-run/react";
-import PageTitle from "components/PageTitle";
+import PageTitle from "components/DesignSystem/PageTitle";
 import useStyles from "./styles";
 
 const Category = ({
