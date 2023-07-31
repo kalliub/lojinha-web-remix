@@ -113,36 +113,57 @@ function handleBrowserRequest(
   remixContext: EntryContext
 ) {
   return new Promise((resolve, reject) => {
-    const { pipe, abort } = renderToPipeableStream(
-      <RemixServer
-        context={remixContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
-      {
-        onShellReady() {
-          const body = new PassThrough();
+    const cache = createEmotionCache();
+    const { extractCriticalToChunks } = createEmotionServer(cache);
 
-          responseHeaders.set("Content-Type", "text/html");
-
-          resolve(
-            new Response(body, {
-              headers: responseHeaders,
-              status: responseStatusCode,
-            })
-          );
-
-          pipe(body);
-        },
-        onShellError(error: unknown) {
-          reject(error);
-        },
-        onError(error: unknown) {
-          console.error(error);
-          responseStatusCode = 500;
-        },
-      }
+    const Components = () => (
+      <CacheProvider value={cache}>
+        <ThemeProvider theme={theme()}>
+          <CssBaseline />
+          <RemixServer context={remixContext} url={request.url} />
+        </ThemeProvider>
+      </CacheProvider>
     );
+
+    // Render the component to a string.
+    const html = renderToString(
+      <ServerStyleContext.Provider value={null}>
+        <Components />
+      </ServerStyleContext.Provider>
+    );
+
+    // Grab the CSS from emotion
+    const { styles } = extractCriticalToChunks(html);
+
+    const markup = (
+      <ServerStyleContext.Provider value={styles}>
+        <Components />
+      </ServerStyleContext.Provider>
+    );
+
+    const { pipe, abort } = renderToPipeableStream(markup, {
+      onShellReady() {
+        const body = new PassThrough();
+
+        responseHeaders.set("Content-Type", "text/html");
+
+        resolve(
+          new Response(body, {
+            headers: responseHeaders,
+            status: responseStatusCode,
+          })
+        );
+
+        pipe(body);
+      },
+      onShellError(error: unknown) {
+        reject(error);
+      },
+      onError(error: unknown) {
+        console.error(error);
+        responseStatusCode = 500;
+      },
+    });
 
     setTimeout(abort, ABORT_DELAY);
   });
