@@ -56,7 +56,6 @@ function handleBotRequest(
     const Components = () => (
       <CacheProvider value={cache}>
         <ThemeProvider theme={theme()}>
-          <CssBaseline />
           <RemixServer context={remixContext} url={request.url} />
         </ThemeProvider>
       </CacheProvider>
@@ -119,7 +118,6 @@ function handleBrowserRequest(
     const Components = () => (
       <CacheProvider value={cache}>
         <ThemeProvider theme={theme()}>
-          <CssBaseline />
           <RemixServer context={remixContext} url={request.url} />
         </ThemeProvider>
       </CacheProvider>
