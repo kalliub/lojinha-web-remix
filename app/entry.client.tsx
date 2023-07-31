@@ -4,15 +4,41 @@
  * For more information, see https://remix.run/docs/en/main/file-conventions/entry.client
  */
 
+import { CacheProvider, ThemeProvider } from "@emotion/react";
 import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode } from "react";
+import { startTransition, StrictMode, useCallback, useState } from "react";
 import { hydrateRoot } from "react-dom/client";
+import ClientStyleContext from "styles/ClientStyleContext";
+import createEmotionCache from "styles/createEmotionCache";
+import theme from "themes";
+
+interface ClientCacheProviderProps {
+  children: React.ReactNode;
+}
+const ClientCacheProvider = ({ children }: ClientCacheProviderProps) => {
+  const [cache, setCache] = useState(createEmotionCache());
+
+  const reset = useCallback(() => {
+    setCache(createEmotionCache());
+  }, []);
+
+  return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <ClientStyleContext.Provider value={{ reset }}>
+      <CacheProvider value={cache}>{children}</CacheProvider>
+    </ClientStyleContext.Provider>
+  );
+};
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
-      <RemixBrowser />
+      <ClientCacheProvider>
+        <ThemeProvider theme={theme()}>
+          <RemixBrowser />
+        </ThemeProvider>
+      </ClientCacheProvider>
     </StrictMode>
   );
 });
