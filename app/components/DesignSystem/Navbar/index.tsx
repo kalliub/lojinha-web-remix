@@ -8,6 +8,7 @@ export const NAVBAR_HEIGHT = 75;
 
 const Navbar = () => {
   const location = useLocation();
+
   return (
     <Box
       position="fixed"
@@ -26,12 +27,15 @@ const Navbar = () => {
         <div
           style={{
             position: "absolute",
-            left: "20px",
+            left: "5%",
           }}
         >
           <Link to="/lista">
-            <Button variant="text" sx={{ color: "white" }}>
-              <Icon name="angle-left" size="large" />
+            <Button
+              variant="text"
+              sx={{ "&:hover": { backgroundColor: palette.primary[700] } }}
+            >
+              <Icon name="angle-left" size="large" style={{ color: "white" }} />
               <Typography variant="caption" color="white">
                 Voltar
               </Typography>
