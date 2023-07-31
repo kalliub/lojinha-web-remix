@@ -1,7 +1,8 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useNavigate, useParams } from "@remix-run/react";
 import { useEffect, useMemo } from "react";
-import PageTitle from "components/PageTitle";
+import PageTitle from "components/DesignSystem/PageTitle";
+import ProductList from "components/ProductList";
 import { useList } from "context/ListContext";
 
 const Category = () => {
@@ -40,16 +41,7 @@ const Category = () => {
         }
       />
 
-      {categoryProducts.map((product) => {
-        return (
-          <Box
-            key={`${product.descricao}${product.valor}${product.cor}`}
-            width="100%"
-          >
-            <Typography color="white">{product.descricao}</Typography>
-          </Box>
-        );
-      })}
+      <ProductList products={categoryProducts} />
     </Grid>
   );
 };

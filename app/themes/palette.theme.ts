@@ -1,4 +1,14 @@
-import type { ThemeOptions } from "@mui/material";
+import type { Color, ThemeOptions } from "@mui/material";
+
+// Allowing MaterialUI Theme to accept custom colors on palette
+declare module "@mui/material/styles" {
+  interface Palette {
+    yellow: Color;
+  }
+  interface PaletteOptions {
+    yellow?: Partial<Color>;
+  }
+}
 
 export const palette = {
   primary: {
@@ -28,6 +38,11 @@ export const palette = {
     900: "#6b150f",
     500: "#c23f36",
     200: "#fbdddb",
+  },
+  yellow: {
+    900: "#785702",
+    500: "#ffc107",
+    200: "#ffe8ac",
   },
 };
 

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link, useLocation } from "@remix-run/react";
 import LogoLojinha from "assets/logoLojinha.png";
-import Icon from "components/Icon";
+import Icon from "components/DesignSystem/Icon";
 import { palette } from "themes/palette.theme";
 
 export const NAVBAR_HEIGHT = 75;

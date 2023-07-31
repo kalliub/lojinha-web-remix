@@ -6,7 +6,6 @@
 
 import { CacheProvider, ThemeProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
-import { CssBaseline } from "@mui/material";
 import type { EntryContext } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
