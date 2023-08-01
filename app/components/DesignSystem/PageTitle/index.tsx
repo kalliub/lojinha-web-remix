@@ -11,7 +11,7 @@ const PageTitle = ({ title }: PageTitleProps) => {
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        <Typography variant="h2" color="white">
+        <Typography variant="h2" color="white" textAlign="center">
           {title}
         </Typography>
       </Grid>
@@ -22,6 +22,7 @@ const PageTitle = ({ title }: PageTitleProps) => {
           p={2}
           sx={{ backgroundColor: palette.primary.main }}
           zIndex={1}
+          textAlign="center"
         >
           Lista atualizada em: {updateDate}
         </Typography>

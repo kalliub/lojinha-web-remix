@@ -25,7 +25,7 @@ const Home = () => {
   );
 
   return (
-    <Grid container>
+    <>
       <Navbar />
 
       <ListProvider value={listData}>
@@ -37,7 +37,7 @@ const Home = () => {
           )}
         </Grid>
       </ListProvider>
-    </Grid>
+    </>
   );
 };
 
