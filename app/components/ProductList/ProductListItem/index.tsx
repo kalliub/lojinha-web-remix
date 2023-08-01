@@ -9,8 +9,9 @@ const ProductDetailsContainer = ({
   title,
   description,
 }: Record<string, string>) => {
+  const { classes } = useStyles();
   return (
-    <Grid item display="flex" flexDirection="column" px={2}>
+    <Grid item className={classes.detailsContainer} px={2}>
       <Typography variant="body3" color={palette.primary[200]}>
         {title}
       </Typography>
@@ -39,15 +40,9 @@ const ProductInfo = ({
   cor,
   ram,
 }: Record<string, Nullable<string>>) => {
-  const { breakpoints } = useTheme();
-  const isMobile = useMediaQuery(breakpoints.down("tablet"));
+  const { classes } = useStyles();
   return (
-    <Grid
-      item
-      display="flex"
-      alignItems={isMobile ? "flex-start" : "center"}
-      flexGrow={1}
-    >
+    <Grid item className={classes.productInfo}>
       {armazenamento && (
         <ProductDetailsContainer title="Modelo" description={armazenamento} />
       )}
@@ -58,10 +53,9 @@ const ProductInfo = ({
 };
 
 const ProductValue = ({ value }: Record<string, string>) => {
-  const { breakpoints } = useTheme();
-  const isMobile = useMediaQuery(breakpoints.down("tablet"));
+  const { classes } = useStyles();
   return (
-    <Grid item display="flex" alignItems={isMobile ? "flex-end" : "center"}>
+    <Grid item className={classes.productValue}>
       <Typography variant="h4" fontWeight="400" color={palette.yellow[500]}>
         {value}
       </Typography>

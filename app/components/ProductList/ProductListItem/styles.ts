@@ -13,12 +13,31 @@ const useStyles = makeStyles()(({ breakpoints }) => ({
       transition: "200ms",
     },
   },
+  detailsContainer: {
+    display: "flex",
+    flexDirection: "column",
+  },
   productName: {
     [breakpoints.up("tablet")]: {
       width: "33%",
     },
     display: "flex",
     alignItems: "center",
+  },
+  productInfo: {
+    display: "flex",
+    flexGrow: 1,
+    alignItems: "flex-start",
+    [breakpoints.up("tablet")]: {
+      alignItems: "center",
+    },
+  },
+  productValue: {
+    display: "flex",
+    alignItems: "flex-end",
+    [breakpoints.up("tablet")]: {
+      alignItems: "center",
+    },
   },
 }));
 
