@@ -3,7 +3,6 @@ import { palette } from "themes/palette.theme";
 
 const useStyles = makeStyles()(() => ({
   category: {
-    width: "100%",
     borderBottom: "1px solid rgba(0,0,0,0.1)",
     "&:hover": {
       backgroundColor: palette.primary[200],
