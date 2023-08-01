@@ -27,7 +27,7 @@ const useStyles = makeStyles()(({ breakpoints }) => ({
   productInfo: {
     display: "flex",
     flexGrow: 1,
-    alignItems: "flex-start",
+    alignItems: "flex-end",
     [breakpoints.up("tablet")]: {
       alignItems: "center",
     },

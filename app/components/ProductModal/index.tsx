@@ -1,5 +1,13 @@
 import type { ModalProps } from "@mui/material";
-import { Box, Button, Grid, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Modal,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Icon from "components/DesignSystem/Icon";
 import { palette } from "themes/palette.theme";
 import type { Product } from "types/List";
@@ -26,6 +34,9 @@ const ProductDetailsContainer = ({
 };
 
 const ProductModal = ({ product, sx, ...modalProps }: ProductModalProps) => {
+  const { breakpoints } = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down("tablet"));
+
   return (
     <Modal
       sx={{
@@ -47,13 +58,13 @@ const ProductModal = ({ product, sx, ...modalProps }: ProductModalProps) => {
         borderRadius={2}
         display="flex"
         flexDirection="column"
+        width={isMobile ? "90vw" : "400px"}
       >
         <Grid
           container
           flexDirection="column"
           position="relative"
           justifyContent="center"
-          minWidth="400px"
         >
           <Button
             variant="secondaryIcon"
@@ -69,14 +80,12 @@ const ProductModal = ({ product, sx, ...modalProps }: ProductModalProps) => {
           <img
             alt=""
             src={String(product.linkFoto)}
-            style={{ height: 300, objectFit: "scale-down" }}
+            style={{ height: 300, width: "100%", objectFit: "scale-down" }}
           />
           <Button
             onClick={() => window.open(String(product.linkFoto), "_blank")}
             variant="text"
             sx={{
-              // position: "absolute",
-              // bottom: 0,
               width: "100%",
               "&:hover": {
                 backgroundColor: palette.yellow[500],

@@ -54,9 +54,15 @@ const ProductInfo = ({
 
 const ProductValue = ({ value }: Record<string, string>) => {
   const { classes } = useStyles();
+  const { breakpoints } = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down("tablet"));
   return (
     <Grid item className={classes.productValue}>
-      <Typography variant="h4" fontWeight="400" color={palette.yellow[500]}>
+      <Typography
+        variant={isMobile ? "h5" : "h4"}
+        fontWeight={isMobile ? "bold" : "400"}
+        color={palette.yellow[500]}
+      >
         {value}
       </Typography>
     </Grid>

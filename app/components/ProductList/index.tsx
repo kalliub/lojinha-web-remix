@@ -8,7 +8,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   return (
-    <Grid container maxWidth={1200}>
+    <Grid container maxWidth={1080}>
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}

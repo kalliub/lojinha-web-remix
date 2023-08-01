@@ -1,4 +1,10 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Link, useLocation } from "@remix-run/react";
 import LogoLojinha from "assets/logoLojinha.png";
 import Icon from "components/DesignSystem/Icon";
@@ -8,6 +14,8 @@ export const NAVBAR_HEIGHT = 75;
 
 const Navbar = () => {
   const location = useLocation();
+  const { breakpoints } = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down("tablet"));
 
   return (
     <Box
@@ -27,7 +35,7 @@ const Navbar = () => {
         <div
           style={{
             position: "absolute",
-            left: "5%",
+            left: isMobile ? 0 : 20,
           }}
         >
           <Link to="/lista">
