@@ -1,9 +1,17 @@
 import { Grid } from "@mui/material";
+import type { MetaFunction } from "@remix-run/node";
 import { useNavigate, useParams } from "@remix-run/react";
 import { useEffect, useMemo } from "react";
 import PageTitle from "components/DesignSystem/PageTitle";
 import ProductList from "components/ProductList";
 import { useList } from "context/ListContext";
+import { pageTitle } from "utils/formatters";
+
+export const meta: MetaFunction = ({ params }) => ({
+  title: pageTitle(
+    params.category === "all" ? "Todos os Produtos" : params.category
+  ),
+});
 
 const Category = () => {
   const navigate = useNavigate();
@@ -36,7 +44,7 @@ const Category = () => {
       <PageTitle
         title={
           selectedCategory === "all"
-            ? "Todos os produtos"
+            ? "Todos os Produtos"
             : selectedCategory || ""
         }
       />
