@@ -1,4 +1,4 @@
-FROM node:18-alpine3.17
+FROM node:18-alpine3.18
 
 WORKDIR /app
 
@@ -17,5 +17,3 @@ COPY .env build/
 COPY .env public/build/
 
 EXPOSE 3000
-
-CMD ["yarn", "start"]
