@@ -17,3 +17,5 @@ COPY .env build/
 COPY .env public/build/
 
 EXPOSE 3000
+
+CMD ["/bin/sh", "-c", "yarn build && yarn start"]

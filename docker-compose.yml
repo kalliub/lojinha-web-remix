@@ -23,10 +23,9 @@ services:
       - MEMCACHIER_SERVERS=memcached:11211
     depends_on:
       - memcached
-    command: sh -c "yarn build && yarn start"
   
   memcached:
-    image: "memcached:alpine3.18"
+    image: "public.ecr.aws/docker/library/memcached:alpine"
     networks:
       - bridge
     container_name: lojinha_memcached
