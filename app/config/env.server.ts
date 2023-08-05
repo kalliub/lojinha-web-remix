@@ -4,6 +4,11 @@ const schema = z.object({
   APP_NAME: z.string().min(1).default("Lojinha Importados"),
   HOME_REDIRECT_LINK: z.string().min(1).default("/lista"),
   GOOGLE_SHEETS_URL: z.string().min(1),
+  CACHE_EXPIRATION_TIME: z
+    .string()
+    .min(1)
+    .default(String(60 * 5)) // 5 minutes
+    .transform((value) => Number(value)),
 });
 
 type ENV = z.infer<typeof schema>;

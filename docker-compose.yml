@@ -1,0 +1,31 @@
+version: "3.7"
+
+networks:
+  bridge:
+    driver: bridge
+    name: local
+
+services:
+  remix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: bridge
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - bridge
+    environment:
+      - MEMCACHIER_SERVERS=memcached:11211
+    depends_on:
+      - memcached
+    command: ["yarn", "dev"]
+  
+  memcached:
+    image: "public.ecr.aws/docker/library/memcached:alpine"
+    networks:
+      - bridge
+    ports:
+      - "11211:11211"
