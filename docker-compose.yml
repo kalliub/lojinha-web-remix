@@ -17,17 +17,15 @@ services:
       - "3000:3000"
     networks:
       - bridge
-    stdin_open: true
-    tty: true
     environment:
       - MEMCACHIER_SERVERS=memcached:11211
     depends_on:
       - memcached
+    command: ["yarn", "dev"]
   
   memcached:
     image: "public.ecr.aws/docker/library/memcached:alpine"
     networks:
       - bridge
-    container_name: lojinha_memcached
     ports:
       - "11211:11211"
