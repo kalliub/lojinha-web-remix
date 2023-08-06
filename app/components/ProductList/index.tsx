@@ -16,7 +16,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
           onClose={() => setSelectedProduct(null)}
         />
       )}
-      {products.map((product) => {
+      {products.slice(0, 5).map((product) => {
         return (
           <ProductListItem
             key={`${product.descricao}${product.valor}${product.cor}`}
