@@ -1,11 +1,18 @@
-import { Grid } from "@mui/material";
-import { useState } from "react";
+import { Button, Grid } from "@mui/material";
+import { useMemo, useState } from "react";
 import ProductModal from "components/ProductModal";
 import type { Product } from "types/List";
 import ProductListItem from "./ProductListItem";
 
+const ITEMS_PER_PAGE = 15;
+
 const ProductList = ({ products }: { products: Product[] }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [page, setPage] = useState(1);
+
+  const renderedItems = useMemo(() => {
+    return products.slice(0, page * ITEMS_PER_PAGE);
+  }, [page, products]);
 
   return (
     <Grid container maxWidth={1080}>
@@ -16,7 +23,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
           onClose={() => setSelectedProduct(null)}
         />
       )}
-      {products.map((product) => {
+      {renderedItems.map((product) => {
         return (
           <ProductListItem
             key={`${product.descricao}${product.valor}${product.cor}`}
@@ -25,6 +32,20 @@ const ProductList = ({ products }: { products: Product[] }) => {
           />
         );
       })}
+      {products.length > ITEMS_PER_PAGE &&
+        renderedItems.length < products.length && (
+          <Button
+            onClick={() => setPage(page + 1)}
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{
+              my: 2,
+            }}
+          >
+            Ver mais
+          </Button>
+        )}
     </Grid>
   );
 };
