@@ -10,8 +10,6 @@ COPY . .
 
 RUN npm run build
 
-COPY .env .
-
 EXPOSE 3000
 
 CMD ["/bin/sh", "-c", "npm start"]
