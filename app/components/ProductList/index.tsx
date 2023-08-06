@@ -15,7 +15,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
   }, [page, products]);
 
   return (
-    <Grid container maxWidth={1080}>
+    <Grid container maxWidth={1080} mb={2}>
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
@@ -40,7 +40,8 @@ const ProductList = ({ products }: { products: Product[] }) => {
             color="primary"
             fullWidth
             sx={{
-              my: 2,
+              mt: 2,
+              p: 3,
             }}
           >
             Ver mais
