@@ -6,17 +6,20 @@ phases:
       nodejs: 18
     commands:
       - echo Installing source dependencies...
-      - yarn install
+      - npm install
   build:
     commands:
       - echo Build started on `date`
       - echo Compiling the code...
-      - yarn build
+      - npm run build
   post_build:
     commands:
       - echo Build completed on `date`
+      - printf '[{"name":"lojinha-w-cache","imageUri":"713138091123.dkr.ecr.us-east-1.amazonaws.com/lojinha"}]' > imagedefinitions.json
+
       
 artifacts:
   files:
+    - imagedefinitions.json
     - '**/*'
   base-directory: build

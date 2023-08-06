@@ -21,7 +21,7 @@ services:
       - MEMCACHIER_SERVERS=memcached:11211
     depends_on:
       - memcached
-    command: ["yarn", "dev"]
+    command: ["/bin/sh", "-c", "npm run dev"]
   
   memcached:
     image: "public.ecr.aws/docker/library/memcached:alpine"

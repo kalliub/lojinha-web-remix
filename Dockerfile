@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 COPY .env .
 
@@ -18,4 +18,4 @@ COPY .env public/build/
 
 EXPOSE 3000
 
-CMD ["/bin/sh", "-c", "yarn build && yarn start"]
+CMD ["/bin/sh", "-c", "npm start"]
