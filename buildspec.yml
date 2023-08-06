@@ -15,7 +15,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - printf '[{"name":"lojinha-w-cache","imageUri":"713138091123.dkr.ecr.us-east-1.amazonaws.com/lojinha"}]' > imagedefinitions.json
 
       
 artifacts:
