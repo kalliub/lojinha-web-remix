@@ -15,6 +15,7 @@ services:
       - .:/app
     ports:
       - "3000:3000"
+      - "8002:8002"
     networks:
       - bridge
     environment:
