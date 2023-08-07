@@ -1,9 +1,5 @@
 # Lojinha Web
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5b82ce0b-54ed-4c80-82d0-4cb6ddf4cd2c/deploy-status)](https://app.netlify.com/sites/lojinha-remix/deploys)
-
-### [🔗 Check it out!](https://lojinha-remix.netlify.app/)
-
 ### Important: This project migration is a Work In Progress!
 
 ## About the project
