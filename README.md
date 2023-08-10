@@ -4,34 +4,27 @@
 
 (This hosted version won't have the cache layer, due to the costs of hosting it on AWS)
 
-## Table of Contents
-
-- [About](#about)
-- [Challenge](#challenge)
-- [Solution](#solution)
-  - [The new cloud architecture](#the-new-cloud-architecture)
-- [Technologies and Libraries](#technologies-and-libraries)
-- [Lojinha](#lojinha)
-
-### Important: This project migration is a Work In Progress
+- [Lojinha Web](#lojinha-web)
+  - [About](#about)
+  - [Solution: The new cloud architecture](#solution-the-new-cloud-architecture)
+    - [V1 - Full AWS architecture](#v1---full-aws-architecture)
+    - [V2 - Netlify + AWS Lambda (cheaper solution)](#v2---netlify--aws-lambda-cheaper-solution)
+  - [Technologies and Libraries](#technologies-and-libraries)
+  - [What is Lojinha?](#lojinha)
 
 ## About
 
 This project is a more updated version of the [current Lojinha official website](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development, implement best practices and open it to a public repository with the authorization of the client.
 
+👉 I probably won't implement everything the original project has, because I'm focusing on build my portfolio with the majority of the technologies I'm studying, but I'll try to implement the most important features.
+
 When I first develop this freelance project on **Jan/2020**, the client wanted a new website for their store, which would be used by their customers to see the products available in the store. They wanted a project with no recurrent costs (such as a CMS or a database), so I developed a script to read their Google Sheets spreadsheet and generate a JSON file with the products data, which would be used by the website. So yes, Google Sheets is my database and API.
 
 Now I see that the users had a long repeated initial request time, so I decided to rebuild this application with an architecture that uses server-side rendering and caching. To achieve this, I'm using Remix with Memcached, hosted on AWS.
 
-## Solution
+## Solution: The new cloud architecture
 
-- I developed an script to read the spreadsheet and generate a JSON file with the products data, which would be used by the website, [which can be found on this repository](https://github.com/kalliub/google-sheets-to-json). So yes, Google Sheets is my database and API.
-- The website was rapidly designed by me using Figma, and approved by the staff. Then, this website was online.
-- We (me and my life partner [Geovanna Nista](https://github.com/rainhavisenya)) also developed a React Native app for the same list, because their already had one app, which some customers used to see the products. But this repository I probably won't make public, because it's not as well developed as this one.
-
-### The new cloud architecture
-
-#### V1 - Full AWS architecture
+### V1 - Full AWS architecture
 
 To this new version, I'm using Remix with Memcached, hosted on AWS. Although this project doesn't need a high availability solution, I'm using AWS because I'm studying for the AWS Certification, so I'm using this project as a playground.
 
@@ -41,7 +34,7 @@ Probably this would not be the best solution for this project, because the clien
   <img src="app/assets/lojinha-arch-v1.jpeg" alt="arch-v1" width="400"/>
 </a>
 
-#### V2 - Netlify + AWS Lambda (cheaper solution)
+### V2 - Netlify + AWS Lambda (cheaper solution)
 
 This version has a mixed solution, but uses AWS at the minimum, so it's cheaper. I'm using Netlify to host the website and AWS Lambda to be an interface between the database and the cache layer.
 
