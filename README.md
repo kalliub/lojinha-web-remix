@@ -1,43 +1,81 @@
 # Lojinha Web
 
-### Important: This project migration is a Work In Progress!
+**[🔗 Check it out!](https://lojinha.kalliu.com/)**
 
-## About the project
+(This hosted version won't have the cache layer, due to the costs of hosting it on AWS)
 
+## Table of Contents
 
-This project is a more updated version of the [current Lojinha official website](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development, implement best practices and open it to a public repository.
+- [About](#about)
+- [Challenge](#challenge)
+- [Solution](#solution)
+  - [The new cloud architecture](#the-new-cloud-architecture)
+- [Technologies and Libraries](#technologies-and-libraries)
+- [Lojinha](#lojinha)
 
-### The challenge
+### Important: This project migration is a Work In Progress
 
-When I first develop this project on **Jan/2020**, it had the following requirements:
+## About
 
-#### The users
+This project is a more updated version of the [current Lojinha official website](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development, implement best practices and open it to a public repository with the authorization of the client.
+
+When I first develop this freelance project on **Jan/2020**, the client wanted a new website for their store, which would be used by their customers to see the products available in the store. They wanted a project with no recurrent costs (such as a CMS or a database), so I developed a script to read their Google Sheets spreadsheet and generate a JSON file with the products data, which would be used by the website. So yes, Google Sheets is my database and API.
+
+Now I see that the users had a long repeated initial request time, so I decided to rebuild this application with an architecture that uses server-side rendering and caching. To achieve this, I'm using Remix with Memcached, hosted on AWS.
+
+## Challenge
+
+### The users
 
 - Should be able to see the products available in the store, displayed on different categories with their respective prices and descriptions;
 - Were used to use a Google Sheets spreadsheet to see the products, so the new website could have a similar "list" layout;
 - Would access the website from their mobile phones, so the website should be responsive, fast and lightweight;
 
-#### The staff
+### The staff
 
 - Should be able to update the products on the spreadsheet and the website should update automatically and immediately;
 - Access the website from a desktop or tablet.
 - Are used to the Google Sheets spreadsheet to update the products, so I could not use a CMS or a database to store the products, but I could adapt their spreadsheet.
 
-### My solution
+## Solution
 
 - I developed an script to read the spreadsheet and generate a JSON file with the products data, which would be used by the website, [which can be found on this repository](https://github.com/kalliub/google-sheets-to-json). So yes, Google Sheets is my database and API.
 - The website was rapidly designed by me using Figma, and approved by the staff. Then, this website was online.
 - We (me and my life partner [Geovanna Nista](https://github.com/rainhavisenya)) also developed a React Native app for the same list, because their already had one app, which some customers used to see the products. But this repository I probably won't make public, because it's not as well developed as this one.
 
-### About Lojinha
+### The new cloud architecture
 
-"Lojinha Importados" is a Brazilian store focused on general electronic products, selling its items in a physical store and on marketplaces such as MercadoLivre and its own virtual store.
+#### V1 - Full AWS architecture
 
-### Technologies and Libraries
+To this new version, I'm using Remix with Memcached, hosted on AWS. Although this project doesn't need a high availability solution, I'm using AWS because I'm studying for the AWS Certification, so I'm using this project as a playground.
+
+Probably this would not be the best solution for this project, because the client still doesn't want to pay for a hosting solution and this solution has EC2, Load Balancer and Pipeline costs.
+
+<a href="app/assets/lojinha-arch-v1.jpeg">
+  <img src="app/assets/lojinha-arch-v1.jpeg" alt="arch-v1" width="400"/>
+</a>
+
+#### V2 - Netlify + AWS Lambda (cheaper solution)
+
+This version has a mixed solution, but uses AWS at the minimum, so it's cheaper. I'm using Netlify to host the website and AWS Lambda to be an interface between the database and the cache layer.
+
+In addition, the EventBridge trigger is used to update the cache layer when the database is updated, so the website never has to wait the database response again and would only communicate with the cache layer.
+
+<a href="app/assets/lojinha-arch-v2.jpg">
+  <img src="app/assets/lojinha-arch-v2.jpg" alt="arch-v2" width="400"/>
+</a>
+
+## Technologies and Libraries
 
 - [TypeScript](https://www.typescriptlang.org/): Language
 - [React](https://react.dev/): JavaScript Framework
 - [Remix](https://remix.run/): Server-Side Rendering framework
 - [Netlify](https://www.netlify.com/): Hosting solution
+- [Amazon Web Services (AWS)](aws.amazon.com): Cloud solution
+- [Memcached](https://memcached.org/): Cache solution
 - [Material UI](https://mui.com/material-ui/getting-started/): Component library
 - [Zod](https://zod.dev/): TypeScript validation library
+
+## Lojinha
+
+"Lojinha Importados" is a Brazilian store focused on general electronic products, selling its items in a physical store and on marketplaces such as MercadoLivre and its own virtual store.
