@@ -23,20 +23,6 @@ When I first develop this freelance project on **Jan/2020**, the client wanted a
 
 Now I see that the users had a long repeated initial request time, so I decided to rebuild this application with an architecture that uses server-side rendering and caching. To achieve this, I'm using Remix with Memcached, hosted on AWS.
 
-## Challenge
-
-### The users
-
-- Should be able to see the products available in the store, displayed on different categories with their respective prices and descriptions;
-- Were used to use a Google Sheets spreadsheet to see the products, so the new website could have a similar "list" layout;
-- Would access the website from their mobile phones, so the website should be responsive, fast and lightweight;
-
-### The staff
-
-- Should be able to update the products on the spreadsheet and the website should update automatically and immediately;
-- Access the website from a desktop or tablet.
-- Are used to the Google Sheets spreadsheet to update the products, so I could not use a CMS or a database to store the products, but I could adapt their spreadsheet.
-
 ## Solution
 
 - I developed an script to read the spreadsheet and generate a JSON file with the products data, which would be used by the website, [which can be found on this repository](https://github.com/kalliub/google-sheets-to-json). So yes, Google Sheets is my database and API.
