@@ -4,19 +4,20 @@
 
 (This hosted version won't have the cache layer, due to the costs of hosting it on AWS)
 
-- [Lojinha Web](#lojinha-web)
-  - [About](#about)
-  - [Solution: The new cloud architecture](#solution-the-new-cloud-architecture)
-    - [V1 - Full AWS architecture](#v1---full-aws-architecture)
-    - [V2 - Netlify + AWS Lambda (cheaper solution)](#v2---netlify--aws-lambda-cheaper-solution)
-  - [Technologies and Libraries](#technologies-and-libraries)
-  - [What is Lojinha?](#lojinha)
+## Table of Contents
+
+- [About](#about)
+- [Solution: The new cloud architecture](#solution-the-new-cloud-architecture)
+  - [V1 - Full AWS architecture](#v1---full-aws-architecture)
+  - [V2 - Netlify + AWS Lambda (cheaper solution)](#v2---netlify--aws-lambda-cheaper-solution)
+- [Technologies and Libraries](#technologies-and-libraries)
+- [What is Lojinha?](#lojinha)
 
 ## About
 
-This project is a more updated version of the [current Lojinha official website](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development, implement best practices and open it to a public repository with the authorization of the client.
-
 👉 I probably won't implement everything the original project has, because I'm focusing on build my portfolio with the majority of the technologies I'm studying, but I'll try to implement the most important features.
+
+This project is a more updated version of the [current Lojinha official website](https://lojinhaimportados.com.br/lista/), where I better showcase my most recent learnings in Front End development, implement best practices and open it to a public repository with the authorization of the client.
 
 When I first develop this freelance project on **Jan/2020**, the client wanted a new website for their store, which would be used by their customers to see the products available in the store. They wanted a project with no recurrent costs (such as a CMS or a database), so I developed a script to read their Google Sheets spreadsheet and generate a JSON file with the products data, which would be used by the website. So yes, Google Sheets is my database and API.
 
