@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD ["/bin/sh", "-c", "npm start"]
+CMD ["/bin/sh", "-c", "npm run aws-start"]

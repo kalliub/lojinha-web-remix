@@ -4,7 +4,8 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "start": "dotenv -e .env remix-serve build",
+    "aws-start": "dotenv -e .env remix-serve build",
+    "start": "cross-env NODE_ENV=production netlify dev",
     "typecheck": "tsc"
   },
   "dependencies": {
