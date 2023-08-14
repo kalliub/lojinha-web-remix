@@ -37,7 +37,9 @@ Probably this would not be the best solution for this project, because the clien
 
 ### V2 - Netlify + AWS Lambda (cheaper solution)
 
-This version has a mixed solution, but uses AWS at the minimum, so it's cheaper. I'm using Netlify to host the website and AWS Lambda to be an interface between the database and the cache layer.
+This version has a mixed solution, but although it still needs AWS for the Memcached instance, Netlify hosts the application on a free tier, so it's cheaper.
+
+I'm using Netlify to host the website and AWS Lambda to be an interface between the database and the cache layer.
 
 In addition, the EventBridge trigger is used to update the cache layer when the database is updated, so the website never has to wait the database response again and would only communicate with the cache layer.
 
